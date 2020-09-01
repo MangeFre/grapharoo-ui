@@ -3,14 +3,13 @@ import React, { Component } from 'react';
 export default class LinkInput extends Component {
 	constructor(props) {
 		super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.validateInput = this.validateInput.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleSubmit(e) {
-        // Submitting forms causes a page-reload -> Bad. Prevent it.
+		// Submitting forms causes a page-reload -> Bad. Prevent it.
 		e.preventDefault();
-        // Here, we could validate the input.
+		// Here, we could validate the input.
 		// Then, we would have to get the next link.
 		// Right now, I'm just going to put it in the "history."
 		const { onSubmit } = this.props;
@@ -19,7 +18,7 @@ export default class LinkInput extends Component {
 		// This is the value of the link input
 		const submittedLink = form.linkInput.value;
 		onSubmit(submittedLink);
-    }
+	}
 
 	render() {
 		return (
