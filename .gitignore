@@ -11,6 +11,9 @@
 # production
 /build
 
+# Where everything is put when built
+/dist
+
 # misc
 .DS_Store
 .env.local
