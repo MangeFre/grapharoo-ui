@@ -1,10 +1,11 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
+import Content from './Content';
 
 function App() {
 	return (
 		<div className="App">
-			<h1>Hello from App!</h1>
+			<Content />
 		</div>
 	);
 }
