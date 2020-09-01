@@ -16,7 +16,8 @@ export default class LinkInput extends Component {
 		// This grabs the form DOM Element
 		const form = document.forms.link;
 		// This is the value of the link input
-		const submittedLink = form.linkInput.value;
+        const submittedLink = form.linkInput.value;
+        form.linkInput.value = '';
 		onSubmit(submittedLink);
 	}
 
