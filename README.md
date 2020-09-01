@@ -14,6 +14,7 @@ Webpack itself does not really know how to read / transpile JSX and Javascript. 
 
 To develop in the app, just type in:
 
+npm install (if you haven't done this already)
 npm run dev
 
 in your terminal. Dev will run webpack in development mode. It opens up a server that serves all the files straight from memory (you will not see the bundle.js file be created in the dist folder). It also enables HMR - Hot Module Replacement. If you haven't seen that before, it basically allows for instant updates from your code onto your server. Just leave your terminal running webpack as you code, and all your changes will be updated in the browser in an instant (as long as you save them!).
