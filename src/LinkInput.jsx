@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import './LinkInput.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 export default class LinkInput extends Component {
 	constructor(props) {
@@ -23,9 +27,11 @@ export default class LinkInput extends Component {
 
 	render() {
 		return (
-			<form name="link" onSubmit={(e) => this.handleSubmit(e)}>
-				<input type="text" name="linkInput"></input>
-				<button type="submit">Submit</button>
+			<form className="searchForm" name="link" onSubmit={(e) => this.handleSubmit(e)}>
+				<input type="text" name="linkInput" placeholder="Switcheroo Link"></input>
+				<button type="submit">
+					<FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+				</button>
 			</form>
 		);
 	}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LinkInput from './LinkInput';
+import Header from './Header';
 
 // Old way of making components
 export default class Content extends Component {
@@ -34,9 +34,7 @@ export default class Content extends Component {
 		const { history } = this.state;
 		return (
 			<>
-				<h1>Grapharoo</h1>
-				<h3>Mapping out the old Switcheroo Links</h3>
-				<LinkInput onSubmit={this.handleSubmit} />
+				<Header title="Grapharoo" subtitle="Mapping out the old Switcheroo Links" onSubmit={this.handleSubmit} />
 				{history.map((oldLink) => {
 					return <p key={oldLink}>{oldLink}</p>;
 				})}
