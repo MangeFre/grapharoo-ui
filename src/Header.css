@@ -1,6 +1,6 @@
 .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
 
@@ -12,6 +12,7 @@
     flex-grow: 1;
     padding: 5px 15px;
     display: flex;
+    align-self: center;
 }
 
 .header .icon {
@@ -35,4 +36,5 @@
 .header .searchForm {
     margin: auto 0;
     flex-grow: 1;
+    align-self: center;
 }
