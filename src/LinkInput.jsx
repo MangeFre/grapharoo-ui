@@ -31,11 +31,11 @@ export default class LinkInput extends Component {
 		// This grabs the form DOM Element
 		const form = document.forms.link;
 		// This is the value of the link input
-		const submittedLink = form.linkInput.value;
+		const submittedLink = form.linkInput.value.trim();
 		const valid = validateInput(submittedLink);
 		if (!valid) {
 			// This should display an error.
-			toast.error('Incorrect Link', { position: toast.POSITION.BOTTOM_CENTER });
+			toast.error('That does not look like a link!', { position: toast.POSITION.BOTTOM_CENTER });
 		} else {
 			form.linkInput.value = '';
 			onSubmit(submittedLink);
