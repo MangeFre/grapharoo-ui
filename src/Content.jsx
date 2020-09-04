@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
+import getNextLink from './apiHandler.js';
 
 // Old way of making components
 export default class Content extends Component {
@@ -16,9 +17,10 @@ export default class Content extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit(submittedLink) {
+	async handleSubmit(submittedLink) {
 		// Destructuring the state, to get an array of submitted links.
-		console.log(`Submitted the link ${submittedLink} into Content component`);
+		const response = await getNextLink(submittedLink);
+		console.log(response);
 		const { history } = this.state;
 		history.push(submittedLink);
 		// Cloning the array. There is some reason for this - I forgot why.
@@ -34,7 +36,11 @@ export default class Content extends Component {
 		const { history } = this.state;
 		return (
 			<>
-				<Header title="Grapharoo" subtitle="Mapping out the old Switcheroo Links" onSubmit={this.handleSubmit} />
+				<Header
+					title="Grapharoo"
+					subtitle="Mapping out the old Switcheroo Links"
+					onSubmit={this.handleSubmit}
+				/>
 				{history.map((oldLink) => {
 					return <p key={oldLink}>{oldLink}</p>;
 				})}
