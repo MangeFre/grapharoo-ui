@@ -11,6 +11,5 @@ export default async function getNextLink(link) {
 	});
 
 	const data = await response.json();
-	console.log(data);
 	return data;
 }
