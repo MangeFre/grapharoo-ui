@@ -20,25 +20,33 @@ export default class Content extends Component {
 	}
 
 	async handleSubmit(submittedLink) {
-		const { history, graph } = this.state;
+		const { history } = this.state;
 
 		// Response is JSON with a URL. Boy, imagine if I could make like... a TYPE of the response?
 		// Would be a lot easier ;)
-		const response = await getNextLink(submittedLink);
-		const { url } = response;
-		const newGraph = [...graph];
-
-		// First insert gets added to chain.
-		if (newGraph.length === 0) newGraph.push(submittedLink);
-
-		newGraph.push(url);
-
+		const newGraph = [submittedLink];
+		await this.nextLink(submittedLink, 10, newGraph);
+		console.log(newGraph);
 		// Store the newly added link in "history"
 		const newHistory = [...history];
 		this.setState({
 			history: newHistory,
 			graph: newGraph,
 		});
+	}
+
+	// Origin: URl that points to some URL
+	// Limit: Maximum amount of links
+	// Accumulator: Reference to list that gets URLs added to it.
+	async nextLink(origin, limit, accumulator) {
+		if (limit <= 0) {
+			return accumulator;
+		}
+		// API Call.
+		const response = await getNextLink(origin);
+		const { url } = response;
+		accumulator.push(url);
+		return await this.nextLink(url, limit - 1, accumulator);
 	}
 
 	// Renders the actual UI.
