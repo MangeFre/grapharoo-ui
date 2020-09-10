@@ -17,7 +17,8 @@
     "react-hot-loader": "^4.12.21",
     "react-scripts": "3.4.3",
     "react-toastify": "^6.0.8",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "styled-jsx": "^3.3.0"
   },
   "scripts": {
     "dev": "webpack-dev-server --mode development",
