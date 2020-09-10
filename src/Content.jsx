@@ -26,7 +26,6 @@ export default class Content extends Component {
 		// Would be a lot easier ;)
 		const newGraph = [submittedLink];
 		await this.nextLink(submittedLink, 10, newGraph);
-		console.log(newGraph);
 		// Store the newly added link in "history"
 		const newHistory = [...history];
 		this.setState({
@@ -53,7 +52,6 @@ export default class Content extends Component {
 	render() {
 		// Gonna grab the history from state and render it, if there is any.
 		const { history, graph } = this.state;
-		console.log(graph);
 		return (
 			<>
 				<Header
