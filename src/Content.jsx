@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import getNextLink from './apiHandler.js';
 import GraphVisualizer from './GraphVisualizer';
 
 // Old way of making components
@@ -11,7 +10,7 @@ export default class Content extends Component {
 		// initializing state - Infomartion we can change here.
 		this.state = {
 			history: [],
-			graph: [],
+			origin: null,
 		};
 		// Here I am also binding some methods that I want to be called from other
 		// components. This is just to use this component as context so I can call this
@@ -22,36 +21,45 @@ export default class Content extends Component {
 	async handleSubmit(submittedLink) {
 		const { history } = this.state;
 
-		// Response is JSON with a URL. Boy, imagine if I could make like... a TYPE of the response?
-		// Would be a lot easier ;)
-		const newGraph = [submittedLink];
-		await this.nextLink(submittedLink, 10, newGraph);
 		// Store the newly added link in "history"
 		const newHistory = [...history];
 		this.setState({
 			history: newHistory,
-			graph: newGraph,
+			origin: submittedLink,
 		});
-	}
-
-	// Origin: URl that points to some URL
-	// Limit: Maximum amount of links
-	// Accumulator: Reference to list that gets URLs added to it.
-	async nextLink(origin, limit, accumulator) {
-		if (limit <= 0) {
-			return accumulator;
-		}
-		// API Call.
-		const response = await getNextLink(origin);
-		const { url } = response;
-		accumulator.push(url);
-		return await this.nextLink(url, limit - 1, accumulator);
 	}
 
 	// Renders the actual UI.
 	render() {
 		// Gonna grab the history from state and render it, if there is any.
-		const { history, graph } = this.state;
+		const { history, origin } = this.state;
+
+		// Maybe terrible syntax? If origin is null, make content the div.
+		// when link is submitted, this we re-render, and it will display the visualizer.
+		const content =
+			origin === null ? (
+				<>
+					<div>
+						<h1>Enter a link up top</h1>
+					</div>
+					<style jsx>{`
+						div {
+							display: flex;
+							width: 100%;
+							justify-content: center;
+							background: #ff9999;
+							flex: 1;
+						}
+
+						h1 {
+							align-self: center;
+						}
+					`}</style>
+				</>
+			) : (
+				<GraphVisualizer origin={origin} />
+			);
+
 		return (
 			<>
 				<Header
@@ -62,7 +70,7 @@ export default class Content extends Component {
 				{history.map((oldLink) => {
 					return <p key={oldLink}>{oldLink}</p>;
 				})}
-				<GraphVisualizer graph={graph} />
+				{content}
 			</>
 		);
 	}

@@ -6,6 +6,14 @@ function App() {
 	return (
 		<div className="App">
 			<Content />
+			<style jsx>{`
+				div {
+					width: 100%;
+					height: 100%;
+					display: flex;
+					flex-direction: column;
+				}
+			`}</style>
 		</div>
 	);
 }
