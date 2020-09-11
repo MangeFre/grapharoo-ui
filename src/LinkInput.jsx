@@ -19,7 +19,7 @@ function validateInput(inputValue) {
 
 export default class LinkInput extends Component {
 	constructor(props) {
-		super(props);
+		super();
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
