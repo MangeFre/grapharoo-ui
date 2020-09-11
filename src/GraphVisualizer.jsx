@@ -13,9 +13,10 @@ export default function GraphVisualizer({ origin }) {
 					display: flex;
 					width: 100%;
 					height: 100%;
+					flex-wrap: wrap;
+					background: #ff9999;
 				}
 			`}</style>
 		</div>
 	);
 }
-

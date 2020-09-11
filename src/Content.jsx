@@ -33,7 +33,6 @@ export default class Content extends Component {
 	render() {
 		// Gonna grab the history from state and render it, if there is any.
 		const { history, origin } = this.state;
-
 		// Maybe terrible syntax? If origin is null, make content the div.
 		// when link is submitted, this we re-render, and it will display the visualizer.
 		const content =

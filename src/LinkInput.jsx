@@ -35,7 +35,9 @@ export default class LinkInput extends Component {
 		const valid = validateInput(submittedLink);
 		if (!valid) {
 			// This should display an error.
-			toast.error('That does not look like a link!', { position: toast.POSITION.BOTTOM_CENTER });
+			toast.error('That does not look like a link!', {
+				position: toast.POSITION.BOTTOM_CENTER,
+			});
 		} else {
 			form.linkInput.value = '';
 			onSubmit(submittedLink);
