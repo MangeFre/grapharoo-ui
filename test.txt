@@ -6,3 +6,9 @@ https://www.reddit.com/r/todayilearned/comments/hxmmx5/til_that_theres_a_farmer_
 Edge case - weird link - the one with a newline character in it:
 https://www.reddit.com/r/ShittyLifeProTips/comments/hwotpa/slpt_how_to_sleep_fast_in_5_seconds/fz3m6fq/?context=2
 (or full: https://www.reddit.com/r/Mirrorsforsale/comments/hwc9dz/i_guess_they_forgot_that_silver_was_reflective\nfz2jc9c/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
+
+Terrible swedish link:
+https://www.reddit.com/r/sweden/comments/hdmzjm/till_alla_er_vars_hundar_inte_kan_g%C3%A5_f%C3%B6rbi_en/fvmrcjd/?context=2
+
+Link before terrible swedish link:
+https://www.reddit.com/r/ShitPostCrusaders/comments/hdxbno/this_meme_format_is_dead_but_that_wont_stop_me/fvp4ch5/?context=4
