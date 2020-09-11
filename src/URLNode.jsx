@@ -39,7 +39,7 @@ export default class URLNode extends Component {
 	render() {
 		const { destination } = this.state;
 		if (destination === null) return null;
-		const { subreddit_name_prefixed, score, author } = this.state;
+		const { subreddit_name_prefixed, score, author, origin } = this.state;
 		// Conditionally changing CSS if error.
 		return (
 			<>
