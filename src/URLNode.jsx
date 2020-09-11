@@ -23,7 +23,6 @@ export default class URLNode extends Component {
 	}
 
 	async componentDidMount() {
-		console.log('Mounts once?');
 		this.loadData();
 	}
 
@@ -36,7 +35,6 @@ export default class URLNode extends Component {
 		// Changing the state will make another call to componentDidUpdate. If props and state origins are the same
 		// then load the data again.
 		if (this.state.origin !== origin) {
-			console.log(origin);
 			this.setState({
 				origin,
 			});

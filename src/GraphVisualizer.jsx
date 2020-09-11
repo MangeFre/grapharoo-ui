@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './GraphVisualizer.css';
 import URLNode from './URLNode';
 
@@ -17,7 +16,6 @@ export default class GraphVisualizer extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const { origin } = this.props;
 		if (prevProps.origin !== origin) {
-			console.log('Got new origin!');
 			this.setState({
 				origin,
 			});
@@ -26,7 +24,6 @@ export default class GraphVisualizer extends Component {
 
 	render() {
 		const { origin } = this.state;
-		console.log(origin)
 		return (
 			<div>
 				<URLNode url={origin} />
