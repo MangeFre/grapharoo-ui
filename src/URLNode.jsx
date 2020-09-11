@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import getNextLink from './apiHandler.js';
+import { toast } from 'react-toastify';
 
+toast.configure();
 
 export default class URLNode extends Component {
 	constructor(props) {
@@ -17,9 +19,17 @@ export default class URLNode extends Component {
 		// Call the API here
 		const response = await getNextLink(origin);
 		const { url } = response;
-		this.setState({
-			destination: url,
-		});
+
+		// In case there was any error.
+		if (!url) {
+			toast.warning('The last link did not get processed properly.', {
+				position: toast.POSITION.BOTTOM_CENTER,
+			});
+		} else {
+			this.setState({
+				destination: url,
+			});
+		}
 	}
 
 	render() {
@@ -28,7 +38,9 @@ export default class URLNode extends Component {
 		return (
 			<>
 				<div className="container">
-					<a href={origin}>Link to post</a>
+					<a href={origin} target="blank">
+						Link to post
+					</a>
 				</div>
 				<URLNode url={destination} />
 				<style jsx>{`

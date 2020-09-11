@@ -10,6 +10,10 @@ export default async function getNextLink(link) {
 		}),
 	});
 
-	const data = await response.json();
-	return data;
+	try {
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		return err;
+	}
 }

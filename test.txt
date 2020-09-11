@@ -1,0 +1,8 @@
+Some good test links.
+
+"dies" quickly:
+https://www.reddit.com/r/todayilearned/comments/hxmmx5/til_that_theres_a_farmer_in_south_africa_who_has/fz85kjj/?context=2
+
+Edge case - weird link - the one with a newline character in it:
+https://www.reddit.com/r/ShittyLifeProTips/comments/hwotpa/slpt_how_to_sleep_fast_in_5_seconds/fz3m6fq/?context=2
+(or full: https://www.reddit.com/r/Mirrorsforsale/comments/hwc9dz/i_guess_they_forgot_that_silver_was_reflective\nfz2jc9c/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
