@@ -11,6 +11,7 @@ export default class URLNode extends Component {
 		this.state = {
 			origin: url,
 			destination: null,
+			error: false,
 		};
 	}
 
@@ -18,7 +19,7 @@ export default class URLNode extends Component {
 		const { origin } = this.state;
 		// Call the API here
 		const response = await getNextLink(origin);
-		const { url } = response;
+		const { url, subreddit_name_prefixed, score, author } = response;
 
 		// In case there was any error.
 		if (!url) {
@@ -28,19 +29,27 @@ export default class URLNode extends Component {
 		} else {
 			this.setState({
 				destination: url,
+				subreddit_name_prefixed,
+				score,
+				author,
 			});
 		}
 	}
 
 	render() {
-		const { destination, origin } = this.state;
+		const { destination } = this.state;
 		if (destination === null) return null;
+		const { subreddit_name_prefixed, score, author } = this.state;
+		// Conditionally changing CSS if error.
 		return (
 			<>
 				<div className="container">
+					<h2>{subreddit_name_prefixed}</h2>
+					<p>Score: {score}</p>
 					<a href={origin} target="blank">
 						Link to post
 					</a>
+					<p>By {author}</p>
 				</div>
 				<URLNode url={destination} />
 				<style jsx>{`
@@ -49,13 +58,16 @@ export default class URLNode extends Component {
 						min-height: 100px;
 						max-width: 100%;
 						max-height: 200px;
-						background: #ffebcc;
 						display: flex;
+						flex-direction: column;
 						justify-content: center;
+						background: #ffebcc;
 						margin: 5px;
 					}
 
-					a {
+					a,
+					p,
+					h2 {
 						align-self: center;
 					}
 				`}</style>
