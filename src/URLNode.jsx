@@ -32,7 +32,6 @@ export default class URLNode extends Component {
 				position: toast.POSITION.BOTTOM_CENTER,
 			});
 		} else {
-			console.log(response);
 			this.setState({
 				destination: url,
 				subreddit_name_prefixed,
