@@ -4,6 +4,11 @@ import { toast } from 'react-toastify';
 
 toast.configure();
 
+
+function unescapeHTML(escapedHTML) {
+	return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+  }
+
 export default class URLNode extends Component {
 	constructor(props) {
 		super();
@@ -19,7 +24,7 @@ export default class URLNode extends Component {
 		const { origin } = this.state;
 		// Call the API here
 		const response = await getNextLink(origin);
-		const { url, subreddit_name_prefixed, score, author } = response;
+		const { url, subreddit_name_prefixed, score, author, body_html } = response;
 
 		// In case there was any error.
 		if (!url) {
@@ -27,11 +32,13 @@ export default class URLNode extends Component {
 				position: toast.POSITION.BOTTOM_CENTER,
 			});
 		} else {
+			console.log(response);
 			this.setState({
 				destination: url,
 				subreddit_name_prefixed,
 				score,
 				author,
+				body_html
 			});
 		}
 	}
@@ -39,36 +46,50 @@ export default class URLNode extends Component {
 	render() {
 		const { destination } = this.state;
 		if (destination === null) return null;
-		const { subreddit_name_prefixed, score, author, origin } = this.state;
+		const { subreddit_name_prefixed, score, author, origin, body_html } = this.state;
 		// Conditionally changing CSS if error.
 		return (
 			<>
 				<div className="container">
-					<h2>{subreddit_name_prefixed}</h2>
-					<p>Score: {score}</p>
-					<a href={origin} target="blank">
-						Link to post
-					</a>
-					<p>By {author}</p>
+					<h2>Switheroo in <a href={origin} target="blank">{subreddit_name_prefixed}</a></h2>
+					<div className="info">
+						<p>Score: {score}</p>
+						<p>By: {author}</p>
+					</div>
+					<p dangerouslySetInnerHTML={{ __html: unescapeHTML(body_html) }}></p>
 				</div>
 				<URLNode url={destination} />
 				<style jsx>{`
 					.container {
-						min-width: 200px;
-						min-height: 100px;
-						max-width: 100%;
-						max-height: 200px;
 						display: flex;
 						flex-direction: column;
-						justify-content: center;
-						background: #ffebcc;
-						margin: 5px;
+						margin: 1rem 1rem 0rem 1rem;
+						padding: 0.5rem;
+
+						background-color: white;
+
+						border-radius: 0.5rem;
+
+						-webkit-box-shadow: 5px 5px 9px 3px rgba(0,0,0,0.38);
+						-moz-box-shadow: 5px 5px 9px 3px rgba(0,0,0,0.38);
+						box-shadow: 5px 5px 9px 3px rgba(0,0,0,0.38);
 					}
 
-					a,
-					p,
-					h2 {
-						align-self: center;
+					.container:last-of-type {
+						margin-bottom: 1rem;
+					}
+
+					.info {
+						display: flex;
+					}
+
+					p {
+						padding: 1rem 1rem 0 0;
+					}
+
+					h2, p {
+						margin: 0;
+						
 					}
 				`}</style>
 			</>

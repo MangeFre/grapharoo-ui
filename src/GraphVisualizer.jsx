@@ -11,10 +11,14 @@ export default function GraphVisualizer({ origin }) {
 			<style jsx>{`
 				div {
 					display: flex;
+					flex-direction: column;
 					width: 100%;
 					height: 100%;
-					flex-wrap: wrap;
 					background: #ff9999;
+				}
+
+				div:last-child {
+					margin-bottom: 1rem;
 				}
 			`}</style>
 		</div>
