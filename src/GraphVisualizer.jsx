@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './GraphVisualizer.css';
 import URLNode from './URLNode';
+import { toast } from 'react-toastify';
+
+toast.configure();
 
 // This can be used for CSS - Changing CSS
 // should not cause rer-renders (I think)
@@ -16,11 +19,18 @@ export default class GraphVisualizer extends Component {
 
 	addNode(node) {
 		const { nodes } = this.state;
-		const newNodes = [...nodes];
-		newNodes.push(node);
-		this.setState({
-			nodes: newNodes,
-		});
+
+		if (nodes.includes(node)) {
+			toast.warning(`Cycle detected! ${node} has already been visited.`, {
+				position: toast.POSITION.BOTTOM_CENTER,
+			});
+		} else {
+			const newNodes = [...nodes];
+			newNodes.push(node);
+			this.setState({
+				nodes: newNodes,
+			});
+		}
 	}
 
 	render() {
