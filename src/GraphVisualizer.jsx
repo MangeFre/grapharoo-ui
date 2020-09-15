@@ -9,24 +9,34 @@ export default class GraphVisualizer extends Component {
 		super();
 		const { origin } = props;
 		this.state = {
-			origin,
+			nodes: [origin],
 		};
+		this.addNode = this.addNode.bind(this);
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const { origin } = this.props;
-		if (prevProps.origin !== origin) {
-			this.setState({
-				origin,
-			});
-		}
+	addNode(node) {
+		const { nodes } = this.state;
+		const newNodes = [...nodes];
+		newNodes.push(node);
+		this.setState({
+			nodes: newNodes,
+		});
 	}
 
 	render() {
-		const { origin } = this.state;
+		const { nodes } = this.state;
+		const allNodes = nodes.map((nodeLink) => {
+			return (
+				<URLNode
+					url={nodeLink}
+					key={nodeLink}
+					onFinishLoad={(node) => this.addNode(node)}
+				/>
+			);
+		});
 		return (
 			<div>
-				<URLNode url={origin} />
+				{allNodes}
 				<style jsx>{`
 					div {
 						display: flex;

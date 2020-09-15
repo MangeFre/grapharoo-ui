@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import getNextLink from './apiHandler.js';
 import { toast } from 'react-toastify';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowUp, faShekelSign } from '@fortawesome/free-solid-svg-icons'
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faShekelSign } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 toast.configure();
 
@@ -28,8 +28,7 @@ function getFormattedTimePassed(created_utc) {
 	let months = weeks / 4;
 	let years = days / 365;
 
-	if (minutes < 0)
-	{
+	if (minutes < 0) {
 		output = 'just now';
 	} else if (minutes < 60) {
 		output = `${Math.floor(minutes)} minute${minutes >= 2 ? 's' : ''} ago`;
@@ -48,9 +47,10 @@ function getFormattedTimePassed(created_utc) {
 }
 
 function getFormattedScore(score, score_hidden) {
-	return score_hidden ? '[score hidden]' : `${score} point${score !== 1 ? 's' : ''}` 
+	return score_hidden
+		? '[score hidden]'
+		: `${score} point${score !== 1 ? 's' : ''}`;
 }
-
 
 export default class URLNode extends Component {
 	constructor(props) {
@@ -69,22 +69,10 @@ export default class URLNode extends Component {
 
 	// This function always takes prevProps and prevState. They're exactly what it sounds like.
 	async componentDidUpdate(prevProps, prevState) {
-		// Get the origin from the CURRENT props. So if I just passed new props, those are the ones I get.
-		const { url: origin } = this.props;
-
-		// If the state is not the same as props - there is a disconnect, so set state to the new one.
-		// Changing the state will make another call to componentDidUpdate. If props and state origins are the same
-		// then load the data again.
-		if (this.state.origin !== origin) {
-			this.setState({
-				origin,
-			});
+		const { destination } = this.state;
+		if (prevState.destination === null && destination !== null) {
+			this.props.onFinishLoad(destination);
 		}
-		// This.loadData also changes state so... Gotta be careful.
-		else if (this.state.origin !== prevState.origin) {
-			this.loadData();
-		}
-		// Otherwise, do nothing.
 	}
 
 	// breaking this function out.
@@ -92,14 +80,21 @@ export default class URLNode extends Component {
 		const { origin } = this.state;
 		// Call the API here
 		const response = await getNextLink(origin);
-		const { url, subreddit_name_prefixed, score, author, body_html, score_hidden, created_utc } = response;
+		const {
+			url,
+			subreddit_name_prefixed,
+			score,
+			author,
+			body_html,
+			score_hidden,
+			created_utc,
+		} = response;
 
 		// In case there was any error.
 		if (!url) {
 			toast.warning('The last link did not get processed properly.', {
 				position: toast.POSITION.BOTTOM_CENTER,
 			});
-			this.setState({ error: true });
 		} else {
 			this.setState({
 				destination: url,
@@ -108,7 +103,7 @@ export default class URLNode extends Component {
 				author,
 				body_html,
 				score_hidden,
-				created_utc
+				created_utc,
 			});
 		}
 	}
@@ -123,12 +118,21 @@ export default class URLNode extends Component {
 			origin,
 			body_html,
 			score_hidden,
-			created_utc
+			created_utc,
 		} = this.state;
 		const authorURL = `https://www.reddit.com/user/${author}`;
-		const authorElement = author !== '[deleted]' ? 
-			<a className="author" style={{ textDecoration: 'none' }} href={authorURL} target="blank">{author}</a> :
-			<div style={{ color: '#888' }}>{author}</div>;
+		const authorElement =
+			author !== '[deleted]' ? (
+				<a
+					className="author"
+					style={{ textDecoration: 'none' }}
+					href={authorURL}
+					target="blank">
+					{author}
+				</a>
+			) : (
+				<div style={{ color: '#888' }}>{author}</div>
+			);
 
 		// Conditionally changing CSS if error.
 		return (
@@ -140,30 +144,26 @@ export default class URLNode extends Component {
 						</div>
 						<div className="vote down">
 							<FontAwesomeIcon icon={faArrowDown}></FontAwesomeIcon>
-						</div>					
+						</div>
 					</div>
 					<div>
 						<div className="headerContainer">
 							{authorElement}
 							<div className="details">
-								<div>
-									{getFormattedScore(score, score_hidden)}
-								</div>
-								<div>
-									{getFormattedTimePassed(created_utc)}
-								</div>
+								<div>{getFormattedScore(score, score_hidden)}</div>
+								<div>{getFormattedTimePassed(created_utc)}</div>
 								<div>
 									in{' '}
 									<a href={origin} target="blank">
 										{subreddit_name_prefixed}
-									</a> 
+									</a>
 								</div>
 							</div>
 						</div>
-						<p dangerouslySetInnerHTML={{ __html: unescapeHTML(body_html) }}></p>
+						<p
+							dangerouslySetInnerHTML={{ __html: unescapeHTML(body_html) }}></p>
 					</div>
 				</div>
-				<URLNode url={destination} />
 				<style jsx>{`
 					.container {
 						display: flex;
@@ -186,15 +186,13 @@ export default class URLNode extends Component {
 						margin-bottom: 1rem;
 					}
 
-
 					.container > div {
 						padding: 0.5rem;
 					}
 
-
 					.headerContainer {
 						display: flex;
-						font-size: 1.25rem;						
+						font-size: 1.25rem;
 						font-weight: 900;
 						color: #336699;
 					}
@@ -217,20 +215,20 @@ export default class URLNode extends Component {
 					}
 
 					.vote {
-						color: #C6C6C6;
+						color: #c6c6c6;
 						font-size: 1.5rem;
 					}
 
 					.up {
-						color: #FF8b60;
+						color: #ff8b60;
 					}
 
 					.container:last-of-type .up {
-						color: #C6C6C6;
+						color: #c6c6c6;
 					}
-					
+
 					.container:last-of-type .down {
-						color: #9494FF;
+						color: #9494ff;
 					}
 
 					.info {
