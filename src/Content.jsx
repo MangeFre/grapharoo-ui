@@ -6,7 +6,7 @@ import GraphVisualizer from './GraphVisualizer';
 export default class Content extends Component {
 	// Initializes the component
 	constructor(props) {
-		super(props);
+		super();
 		// initializing state - Infomartion we can change here.
 		this.state = {
 			history: [],
