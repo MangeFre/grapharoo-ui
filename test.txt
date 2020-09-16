@@ -1,5 +1,11 @@
 Some good test links.
 
+
+
+## ABOVE ARE STILL PROBLEMATIC
+
+## BELOW ARE FIXED
+
 "dies" quickly:
 https://www.reddit.com/r/todayilearned/comments/hxmmx5/til_that_theres_a_farmer_in_south_africa_who_has/fz85kjj/?context=2
 
