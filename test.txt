@@ -1,6 +1,8 @@
 Some good test links.
 
-
+Leads to error:https://www.reddit.com/r/pics/comments/gt3pki/the_white_house_has_just_been_placed_under/fs9qlxc/?context=4
+Actual error link: https://www.reddit.com/r/pics/comments/gsont0/nobody_is_born_racist/fs6m9za/
+Cause: The fucker hasn't linked the context - just to the root comment. No Link to be extracted there.
 
 ## ABOVE ARE STILL PROBLEMATIC
 
