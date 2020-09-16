@@ -17,6 +17,15 @@ export default class GraphVisualizer extends Component {
 		this.addNode = this.addNode.bind(this);
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		const { origin } = this.props;
+		if (prevProps.origin !== origin) {
+			this.setState({
+				nodes: [origin],
+			});
+		}
+	}
+
 	addNode(node) {
 		const { nodes } = this.state;
 
