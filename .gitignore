@@ -12,7 +12,8 @@
 /build
 
 # Where everything is put when built
-/dist
+public/*.js
+public/*.map
 
 # misc
 .DS_Store
