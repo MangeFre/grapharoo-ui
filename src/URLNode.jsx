@@ -80,15 +80,16 @@ export default class URLNode extends Component {
 		const { origin } = this.state;
 		// Call the API here
 		const response = await getNextLink(origin);
+		const { url } = response.next;
+
 		const {
-			url,
 			subreddit_name_prefixed,
 			score,
 			author,
 			body_html,
 			score_hidden,
 			created_utc,
-		} = response;
+		} = response.link.data;
 
 		// In case there was any error.
 		if (!url) {
