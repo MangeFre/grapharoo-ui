@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import getNextLink from './apiHandler.js';
 import { toast } from 'react-toastify';
+import HTML from 'html-parse-stringify';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faShekelSign } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +14,38 @@ function unescapeHTML(escapedHTML) {
 		.replace(/&lt;/g, '<')
 		.replace(/&gt;/g, '>')
 		.replace(/&amp;/g, '&');
+}
+
+function traverseJsonRec(node, options) {
+	// If this node is a tag (a, p, etc) and the options want to modify that part.
+	if (node.type === 'text') {
+		return;
+	}
+
+	if (node.type === 'tag' && options[node.name]) {
+		const allKeys = Object.keys(options[node.name]);
+		for (let key of allKeys) {
+			console.log('In here!');
+			node.attrs[key] = options[node.name][key];
+		}
+	}
+
+	for (let child of node.children) {
+		traverseJsonRec(child, options);
+	}
+
+	return;
+}
+
+function addOptionsToHTML(unescapedHTML, options = {}) {
+	let newHTML = unescapedHTML;
+
+	let newJson = HTML.parse(newHTML);
+
+	traverseJsonRec(newJson[0], options);
+
+	newHTML = HTML.stringify(newJson);
+	return newHTML;
 }
 
 // create_utc is in seconds
@@ -162,7 +195,11 @@ export default class URLNode extends Component {
 							</div>
 						</div>
 						<p
-							dangerouslySetInnerHTML={{ __html: unescapeHTML(body_html) }}></p>
+							dangerouslySetInnerHTML={{
+								__html: addOptionsToHTML(unescapeHTML(body_html), {
+									a: { target: 'blank' },
+								}),
+							}}></p>
 					</div>
 				</div>
 				<style jsx>{`
