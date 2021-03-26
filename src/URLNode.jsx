@@ -44,12 +44,12 @@ function addOptionsToHTML(unescapedHTML, options = {}) {
 	return newHTML;
 }
 
-// create_utc is in seconds
+
 function getFormattedTimePassed(created_utc) {
 	let output = '';
-
+	let created = Date.parse(created_utc) / 1000; // convert created_utc to Date and get it in seconds
 	let now = Date.now() / 1000; // get current time in seconds
-	let timeDiff = now - created_utc;
+	let timeDiff = now - created;
 	let minutes = timeDiff / 60;
 	let hours = minutes / 60;
 	let days = hours / 24;
