@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create snapshot for future comparison 1`] = `
+<div
+  className="jsx-2763529704"
+>
+  
+</div>
+`;
