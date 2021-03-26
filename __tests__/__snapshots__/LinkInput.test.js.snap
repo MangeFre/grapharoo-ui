@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`See if LinkInput has an onSubmit passed into its props 1`] = `
+exports[`Create snapshot for future comparison 1`] = `
 <form
   className="searchForm"
   name="link"
