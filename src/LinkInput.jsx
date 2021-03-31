@@ -62,12 +62,11 @@ export default class LinkInput extends Component {
 							flex-grow: 1;
 							display: flex;
 							justify-content: center;
-							padding: 10px;
 							width: 100%;
 						}
 						.searchForm input {
 							font-size: 1.25em;
-							width: 95%;
+							width: 100%;
 							padding: 5px;
 							border: none;
 							border-radius: 5px 0% 0% 5px;
