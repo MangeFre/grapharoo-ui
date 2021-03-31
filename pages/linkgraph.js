@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '../src/Layout';
 import Header from '../src/Header';
 import LinkGraph from '../src/LinkGraph';
+import { getAllNodes } from '../src/apiHandler.js';
 
-export default function LinkGraphPage(props) {
+export default function LinkGraphPage({ nodes }) {
 	return (
 		<>
 			<Header
@@ -13,4 +13,14 @@ export default function LinkGraphPage(props) {
 			<LinkGraph></LinkGraph>
 		</>
 	);
+}
+
+export async function getServerSideProps(context) {
+	const res = await getAllNodes();
+	const nodes = await JSON.parse(res);
+	return {
+		props: {
+			nodes,
+		},
+	};
 }
