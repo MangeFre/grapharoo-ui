@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './GraphVisualizer.css';
 import URLNode from './URLNode';
 import { toast } from 'react-toastify';
 
@@ -68,6 +67,11 @@ export default class GraphVisualizer extends Component {
 					div:last-child {
 						margin-bottom: 1rem;
 					}
+
+					li {
+						list-style-type: none;
+					}
+
 				`}</style>
 			</div>
 		);

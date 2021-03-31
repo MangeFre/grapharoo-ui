@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './LinkInput.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -57,6 +56,41 @@ export default class LinkInput extends Component {
 				<button type="submit">
 					<FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
 				</button>
+				<style jsx>
+					{`
+						.searchForm {
+							flex-grow: 1;
+							display: flex;
+							justify-content: center;
+							padding: 10px;
+							width: 100%;
+						}
+						.searchForm input {
+							font-size: 1.25em;
+							width: 95%;
+							padding: 5px;
+							border: none;
+							border-radius: 5px 0% 0% 5px;
+							border-right: 1px solid rgb(253, 87, 87);
+							background-color: white;
+						}
+
+						.searchForm button {
+							font-size: 1.25em;
+							padding: 5px 12px 5px 10px;
+							border-radius: 0 45% 45% 0;
+							background-color: white;
+							border: none;
+							outline: none;
+							transition-duration: 0.4s;
+							color: black;
+						}
+
+						.searchForm button:hover {
+							color: rgb(253, 87, 87);
+						}
+					`}
+				</style>
 			</form>
 		);
 	}

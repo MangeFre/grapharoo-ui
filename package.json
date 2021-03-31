@@ -14,18 +14,18 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "html-parse-stringify": "^2.0.3",
+    "next": "^10.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
-    "react-scripts": "3.4.3",
     "react-toastify": "^6.0.8",
     "regenerator-runtime": "^0.13.7",
     "styled-jsx": "^3.3.0"
   },
   "scripts": {
-    "start": "node server/uiserver.js",
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
+    "start": "next start",
+    "dev": "next dev -p 3001",
+    "build": "next build",
     "test": "jest",
     "update-snapshot": "jest --updateSnapshot"
   },
