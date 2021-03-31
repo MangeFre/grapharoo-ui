@@ -36,6 +36,9 @@ const drag = (simulation) => {
 };
 
 export default function LinkGraph({ nodes }) {
+	const width = 1000;
+	const height = 1000;
+
 	const ref = useD3((svg) => {
 		const cleanNodes = Array.from(
 			new Set(nodes.flatMap((node) => [node.link.url, node.next.url])),
@@ -64,7 +67,8 @@ export default function LinkGraph({ nodes }) {
 			.selectAll('path')
 			.data(links)
 			.join('path')
-			.attr('stroke', 'red');
+			.attr('stroke', 'red')
+			.attr('marker-end', 'url(#arrow)');
 
 		const node = svg
 			.append('g')
@@ -98,13 +102,13 @@ export default function LinkGraph({ nodes }) {
 			node.attr('transform', (d) => `translate(${d.x},${d.y})`);
 		});
 
-
 		return svg.node();
 	});
 
 	return (
 		<div>
 			<svg
+				viewBox={[-width / 2, -height / 2, width, height]}
 				ref={ref}
 				style={{
 					height: 'calc(100% - 20px)',
@@ -112,9 +116,18 @@ export default function LinkGraph({ nodes }) {
 					margin: '10px',
 					background: 'white',
 				}}>
-				<g className="plot-area" />
-				<g className="x-axis" />
-				<g className="y-axis" />
+				<defs>
+					<marker
+						id="arrow"
+						viewBox="0 0 10 10"
+						refX="15"
+						refY="5"
+						markerWidth="6"
+						markerHeight="6"
+						orient="auto-start-reverse">
+						<path d="M 0 0 L 10 5 L 0 10 z" />
+					</marker>
+				</defs>
 			</svg>
 			<style jsx>
 				{`
