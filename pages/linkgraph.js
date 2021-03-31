@@ -10,7 +10,7 @@ export default function LinkGraphPage({ nodes }) {
 				title="Grapharoo"
 				subtitle="Mapping out the old Switcheroo Links"
 				onSubmit={() => {}}></Header>
-			<LinkGraph></LinkGraph>
+			<LinkGraph nodes={nodes}></LinkGraph>
 		</>
 	);
 }
