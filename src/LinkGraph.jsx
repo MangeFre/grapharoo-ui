@@ -36,8 +36,8 @@ const drag = (simulation) => {
 };
 
 export default function LinkGraph({ nodes }) {
-	const width = 1000;
-	const height = 1000;
+	const width = 2000;
+	const height = 2000;
 
 	const ref = useD3((svg) => {
 		const cleanNodes = Array.from(
@@ -86,27 +86,48 @@ export default function LinkGraph({ nodes }) {
 			.attr('stroke-width', 1.5)
 			.attr('r', 4);
 
-		node
-			.append('text')
-			.attr('x', 8)
-			.attr('y', '0.31em')
-			.text((d) => d.id)
-			.clone(true)
-			.lower()
-			.attr('fill', 'none')
-			.attr('stroke', 'white')
-			.attr('stroke-width', 3);
+		const div = d3
+			.select('.graph-container')
+			.append('div')
+			.attr('class', 'tooltip')
+			.style('opacity', 0)
+			.attr('position', 'absolute');
+
+		svg
+			.selectAll('circle')
+			.on('mouseover', function (event, d) {
+				div.transition().duration(200).style('opacity', 0.9);
+				div
+					.html(`<a href=${d.id} target='blank'>${d.id}</a>`)
+					.style('left', event.pageX + 'px')
+					.style('top', event.pageY - 28 + 'px');
+			})
+			.on('mouseout', function (d) {
+				div.transition().duration(500).style('opacity', 0);
+			})
+			.on('click', function (e, d) {
+				window.open(`${d.id}`);
+			});
 
 		simulation.on('tick', () => {
 			link.attr('d', linkArc);
 			node.attr('transform', (d) => `translate(${d.x},${d.y})`);
 		});
 
+		const zoom = d3
+			.zoom()
+			.on('zoom', (event) => {
+				d3.selectAll('g').attr('transform', event.transform);
+			})
+			.scaleExtent([1, 10]);
+
+		svg.call(zoom);
+
 		return svg.node();
 	});
 
 	return (
-		<div>
+		<div className="graph-container">
 			<svg
 				viewBox={[-width / 2, -height / 2, width, height]}
 				ref={ref}
@@ -135,6 +156,22 @@ export default function LinkGraph({ nodes }) {
 						display: flex;
 						height: 100%;
 						width: 100%;
+					}
+				`}
+			</style>
+			<style jsx global>
+				{`
+					.tooltip {
+						position: absolute;
+						text-align: center;
+						width: min-content;
+						height: 28px;
+						padding: 2px;
+						font: 12px sans-serif;
+						background: lightsteelblue;
+						border: 0px;
+						border-radius: 8px;
+						pointer-events: none;
 					}
 				`}
 			</style>

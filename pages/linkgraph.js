@@ -10,14 +10,13 @@ export default function LinkGraphPage({ nodes }) {
 				title="Grapharoo"
 				subtitle="Mapping out the old Switcheroo Links"
 				onSubmit={() => {}}></Header>
-			<LinkGraph nodes={nodes}></LinkGraph>
+			<LinkGraph nodes={nodes} />
 		</>
 	);
 }
 
 export async function getServerSideProps(context) {
-	const res = await getAllNodes();
-	const nodes = await JSON.parse(res);
+	const nodes = await getAllNodes();
 	return {
 		props: {
 			nodes,
