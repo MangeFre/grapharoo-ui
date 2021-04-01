@@ -2,16 +2,18 @@
 
 exports[`Create snapshot for future comparison 1`] = `
 <form
-  className="searchForm"
+  className="jsx-578660039 searchForm"
   name="link"
   onSubmit={[Function]}
 >
   <input
+    className="jsx-578660039"
     name="linkInput"
     placeholder="Switcheroo Link"
     type="text"
   />
   <button
+    className="jsx-578660039"
     type="submit"
   >
     <svg

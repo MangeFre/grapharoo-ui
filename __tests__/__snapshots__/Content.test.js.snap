@@ -3,13 +3,13 @@
 exports[`Create snapshot for future comparison 1`] = `
 Array [
   <div
-    className="header"
+    className="jsx-799146823 header"
   >
     <div
-      className="title"
+      className="jsx-799146823 title"
     >
       <div
-        className="icon"
+        className="jsx-799146823 icon"
       >
         <svg
           aria-hidden="true"
@@ -29,29 +29,37 @@ Array [
           />
         </svg>
       </div>
-      <div>
-        <h1>
+      <div
+        className="jsx-799146823"
+      >
+        <h1
+          className="jsx-799146823"
+        >
           Grapharoo
         </h1>
-        <h3>
+        <h3
+          className="jsx-799146823"
+        >
           Mapping out the old Switcheroo Links
         </h3>
       </div>
     </div>
     <div
-      className="searchForm"
+      className="jsx-799146823 searchForm"
     >
       <form
-        className="searchForm"
+        className="jsx-578660039 searchForm"
         name="link"
         onSubmit={[Function]}
       >
         <input
+          className="jsx-578660039"
           name="linkInput"
           placeholder="Switcheroo Link"
           type="text"
         />
         <button
+          className="jsx-578660039"
           type="submit"
         >
           <svg
