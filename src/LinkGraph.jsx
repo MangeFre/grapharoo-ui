@@ -36,8 +36,8 @@ const drag = (simulation) => {
 };
 
 export default function LinkGraph({ nodes }) {
-	const width = 2000;
-	const height = 2000;
+	const width = 3000;
+	const height = 3000;
 
 	const ref = useD3((svg) => {
 		const cleanNodes = Array.from(
@@ -98,7 +98,12 @@ export default function LinkGraph({ nodes }) {
 			.on('mouseover', function (event, d) {
 				div.transition().duration(200).style('opacity', 0.9);
 				div
-					.html(`<a href=${d.id} target='blank'>${d.id}</a>`)
+					.html(
+						`<a href=${d.id} target='blank'>${new URL(d.id).pathname
+							.split('/')
+							.slice(0, 3)
+							.join('/')}</a>`,
+					)
 					.style('left', event.pageX + 'px')
 					.style('top', event.pageY - 28 + 'px');
 			})
@@ -118,6 +123,8 @@ export default function LinkGraph({ nodes }) {
 			.zoom()
 			.on('zoom', (event) => {
 				d3.selectAll('g').attr('transform', event.transform);
+				link.attr('d', linkArc);
+				node.attr('transform', (d) => `translate(${d.x},${d.y})`);
 			})
 			.scaleExtent([1, 10]);
 
@@ -141,7 +148,7 @@ export default function LinkGraph({ nodes }) {
 					<marker
 						id="arrow"
 						viewBox="0 0 10 10"
-						refX="15"
+						refX="14"
 						refY="5"
 						markerWidth="6"
 						markerHeight="6"
@@ -165,7 +172,7 @@ export default function LinkGraph({ nodes }) {
 						position: absolute;
 						text-align: center;
 						width: min-content;
-						height: 28px;
+						height: min-content;
 						padding: 2px;
 						font: 12px sans-serif;
 						background: lightsteelblue;
