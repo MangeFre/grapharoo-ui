@@ -1,5 +1,5 @@
 // Just an API handler file for talking to our API
-export default async function getNextLink(link) {
+export async function getNextLink(link) {
 	const encodedLink = encodeURI(link);
 	const response = await fetch('http://localhost:3000/link/next', {
 		method: 'POST',
@@ -9,6 +9,24 @@ export default async function getNextLink(link) {
 		body: JSON.stringify({
 			url: encodedLink,
 		}),
+	});
+
+	try {
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		return err;
+	}
+}
+
+export async function getAllNodes() {
+	// Implement this to get ALL the nodes in the DB.
+	// Mock this for now.
+	const response = await fetch('http://localhost:3000/linkgraph', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	});
 
 	try {

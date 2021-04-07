@@ -64,6 +64,10 @@ export default function Header({ title, subtitle, onSubmit }) {
 						flex-grow: 1;
 						align-self: center;
 					}
+
+					.searchForm {
+						padding-right: 1rem;
+					}
 				`}
 			</style>
 		</div>

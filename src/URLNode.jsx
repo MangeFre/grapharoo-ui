@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import getNextLink from './apiHandler.js';
+import { getNextLink } from './apiHandler.js';
 import { toast } from 'react-toastify';
 import HTML from 'html-parse-stringify';
 
@@ -44,7 +44,6 @@ function addOptionsToHTML(unescapedHTML, options = {}) {
 	return newHTML;
 }
 
-
 function getFormattedTimePassed(created_utc) {
 	let output = '';
 	let created = Date.parse(created_utc) / 1000; // convert created_utc to Date and get it in seconds
@@ -87,7 +86,7 @@ export default function URLNode(props) {
 	const [commentData, setCommentData] = useState(null);
 	const [hasUpdatedParent, setHasUpdatedParent] = useState(false);
 	const { onFinishLoad, url } = props;
-	
+
 	useEffect(() => {
 		const fetch = async () => {
 			const res = await getNextLink(url);
@@ -109,8 +108,8 @@ export default function URLNode(props) {
 			return;
 		}
 
-		if(next === null || hasUpdatedParent) return;
-		setHasUpdatedParent(true)
+		if (next === null || hasUpdatedParent) return;
+		setHasUpdatedParent(true);
 		onFinishLoad(next);
 	}, [next, fetchError, onFinishLoad, hasUpdatedParent, url]);
 
