@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import URLNode from './URLNode';
 import { toast } from 'react-toastify';
 
@@ -15,6 +15,8 @@ export default function URLNodeList(props) {
     const [errorUrl, setErrorUrl] = useState(null);
 
     const { originUrl } = props;
+
+    const scrollToRef = useRef(null);
 
     // On originUrl change
     useEffect(() => {
@@ -36,7 +38,7 @@ export default function URLNodeList(props) {
                 });
             }
             else {
-                setNextUrlNode(<URLNode key={'LoadingUrlNode'} url={nextUrl} ></URLNode>);
+                setNextUrlNode(<URLNode key={'LoadingUrlNode'} url={nextUrl}></URLNode>);
                 const fetch = async () => {
                     const res = await getNextLink(nextUrl);
                     if (res) {
@@ -60,15 +62,21 @@ export default function URLNodeList(props) {
             toast.warning(`Processing this link did not work: ${errorUrl}`, {
 				position: toast.POSITION.BOTTOM_CENTER,
 			});
-            setNextUrlNode(<URLNode key={'ErrorUrlNode'} url={errorUrl} hasError={true} ></URLNode>);
+            setNextUrlNode(<URLNode key={'ErrorUrlNode'} url={errorUrl} hasError={true}></URLNode>);
         }
     }, [errorUrl]);
 
-    return (
+    useEffect(() => {
+        if (nextUrlNode) {
+            scrollToRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [nextUrlNode, scrollToRef]);
 
+    return (
         <div>
             {urlNodes}
             {nextUrlNode}
+            <span ref={scrollToRef}></span>
             <style jsx>{`
 					div {
 						display: flex;
