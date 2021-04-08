@@ -1,5 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 import HTML from 'html-parse-stringify';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -44,31 +45,9 @@ function addOptionsToHTML(unescapedHTML, options = {}) {
 }
 
 function getFormattedTimePassed(created_utc) {
-	let output = '';
-	let created = Date.parse(created_utc) / 1000; // convert created_utc to Date and get it in seconds
-	let now = Date.now() / 1000; // get current time in seconds
-	let timeDiff = now - created;
-	let minutes = timeDiff / 60;
-	let hours = minutes / 60;
-	let days = hours / 24;
-	let weeks = days / 7;
-	let months = weeks / 4;
-	let years = days / 365;
-
-	if (minutes < 0) {
+	let output = moment(created_utc).fromNow();
+	if (output === 'a few seconds ago') {
 		output = 'just now';
-	} else if (minutes < 60) {
-		output = `${Math.floor(minutes)} minute${minutes >= 2 ? 's' : ''} ago`;
-	} else if (hours < 24) {
-		output = `${Math.floor(hours)} hour${hours >= 2 ? 's' : ''} ago`;
-	} else if (days < 7) {
-		output = `${Math.floor(days)} day${days >= 2 ? 's' : ''} ago`;
-	} else if (weeks < 4) {
-		output = `${Math.floor(weeks)} week${weeks >= 2 ? 's' : ''} ago`;
-	} else if (months < 12) {
-		output = `${Math.floor(months)} month${months >= 2 ? 's' : ''} ago`;
-	} else {
-		output = `${Math.floor(years)} year${years >= 2 ? 's' : ''} ago`;
 	}
 	return output;
 }
