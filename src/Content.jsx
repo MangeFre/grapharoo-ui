@@ -1,42 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
-import GraphVisualizer from './GraphVisualizer';
+import URLNodeList from './URLNodeList';
 
-// Old way of making components
-export default class Content extends Component {
-	// Initializes the component
-	constructor(props) {
-		super();
-		// initializing state - Infomartion we can change here.
-		this.state = {
-			history: [],
-			origin: null,
-		};
-		// Here I am also binding some methods that I want to be called from other
-		// components. This is just to use this component as context so I can call this
-		// in it.
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+// Not sure about the intent of the History feature. This flag will turn it back on
+const displayHistory = false;
 
-	async handleSubmit(submittedLink) {
-		const { history } = this.state;
+export default function Content(props) {
+	const [history, setHistory] = useState([]);
+	const [originUrl, setOriginUrl] = useState(null);
 
-		// Store the newly added link in "history"
-		const newHistory = [...history];
-		this.setState({
-			history: newHistory,
-			origin: submittedLink,
-		});
-	}
+	useEffect(() => {
+		if (originUrl) {
+			setHistory([...history, originUrl]);
+		}
+	}, [originUrl]);
 
-	// Renders the actual UI.
-	render() {
-		// Gonna grab the history from state and render it, if there is any.
-		const { history, origin } = this.state;
-		// Maybe terrible syntax? If origin is null, make content the div.
-		// when link is submitted, this we re-render, and it will display the visualizer.
-		const content =
-			origin === null ? (
+	return (
+		<>
+			<Header
+				title="Grapharoo"
+				subtitle="Mapping out the old Switcheroo Links"
+				onSubmit={setOriginUrl}
+			/>
+			{displayHistory ?
+				history.map((oldLink) => {
+					return <p key={oldLink}>{oldLink}</p>;
+				})
+				:
+				<></>}
+			{!originUrl ?
 				<>
 					<div>
 						<h1>Enter a link up top</h1>
@@ -55,22 +47,9 @@ export default class Content extends Component {
 						}
 					`}</style>
 				</>
-			) : (
-				<GraphVisualizer origin={origin} />
-			);
-
-		return (
-			<>
-				<Header
-					title="Grapharoo"
-					subtitle="Mapping out the old Switcheroo Links"
-					onSubmit={this.handleSubmit}
-				/>
-				{history.map((oldLink) => {
-					return <p key={oldLink}>{oldLink}</p>;
-				})}
-				{content}
-			</>
-		);
-	}
+				:
+				<URLNodeList originUrl={originUrl} />
+			}
+		</>
+	)
 }
