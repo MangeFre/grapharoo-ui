@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import GraphVisualizer from './GraphVisualizer';
+import URLNodeList from './URLNodeList';
 
 // Old way of making components
 export default class Content extends Component {
@@ -56,7 +56,7 @@ export default class Content extends Component {
 					`}</style>
 				</>
 			) : (
-				<GraphVisualizer origin={origin} />
+				<URLNodeList originUrl={origin} />
 			);
 
 		return (
