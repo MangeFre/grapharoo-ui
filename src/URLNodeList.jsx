@@ -13,7 +13,6 @@ export default function URLNodeList(props) {
 
     const [nextUrl, setNextUrl] = useState(null);
     const [errorUrl, setErrorUrl] = useState(null);
-    const [urls, setUrls] = useState([]);
 
     const { originUrl } = props;
 
@@ -22,9 +21,7 @@ export default function URLNodeList(props) {
         // Clear previous data if any
         setUrlNodes([]);
         setNextUrlNode(<></>);
-
         setErrorUrl(null);
-        setUrls([]);
 
         // fetch first url
         setNextUrl(originUrl);
@@ -33,7 +30,7 @@ export default function URLNodeList(props) {
 
     useEffect(() => {
         if (nextUrl && nextUrl !== '') {
-            if (urls.includes(nextUrl)) {
+            if (urlNodes.some(urlNode => urlNode.url === nextUrl)) {
                 toast.warning(`Cycle detected! ${nextUrl} has already been visited.`, {
                     position: toast.POSITION.BOTTOM_CENTER,
                 });
@@ -41,7 +38,6 @@ export default function URLNodeList(props) {
             else {
                 setNextUrlNode(<URLNode key={'LoadingUrlNode'} url={nextUrl} ></URLNode>);
                 const fetch = async () => {
-                    setUrls([...urls, nextUrl]);
                     const res = await getNextLink(nextUrl);
                     if (res) {
                         if (res.next) {
@@ -67,6 +63,7 @@ export default function URLNodeList(props) {
             setNextUrlNode(<URLNode key={'ErrorUrlNode'} url={errorUrl} hasError={true} ></URLNode>);
         }
     }, [errorUrl]);
+
     return (
 
         <div>
