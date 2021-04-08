@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,17 +16,14 @@ function validateInput(inputValue) {
 	return isValid;
 }
 
-export default class LinkInput extends Component {
-	constructor(props) {
-		super();
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
+export default function LinkInput(props) {
 
-	handleSubmit(e) {
+	const { onSubmit } = props;
+
+	function handleSubmit(e) {
 		// Submitting forms causes a page-reload -> Bad. Prevent it.
 		e.preventDefault();
 		// Here, we could validate the input.
-		const { onSubmit } = this.props;
 		// This grabs the form DOM Element
 		const form = document.forms.link;
 		// This is the value of the link input
@@ -43,21 +40,20 @@ export default class LinkInput extends Component {
 		}
 	}
 
-	render() {
-		return (
-			<form
-				className="searchForm"
-				name="link"
-				onSubmit={(e) => this.handleSubmit(e)}>
-				<input
-					type="text"
-					name="linkInput"
-					placeholder="Switcheroo Link"></input>
-				<button type="submit">
-					<FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
-				</button>
-				<style jsx>
-					{`
+	return (
+		<form
+			className="searchForm"
+			name="link"
+			onSubmit={(e) => handleSubmit(e)}>
+			<input
+				type="text"
+				name="linkInput"
+				placeholder="Switcheroo Link"></input>
+			<button type="submit">
+				<FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
+			</button>
+			<style jsx>
+				{`
 						.searchForm {
 							flex-grow: 1;
 							display: flex;
@@ -89,8 +85,7 @@ export default class LinkInput extends Component {
 							color: rgb(253, 87, 87);
 						}
 					`}
-				</style>
-			</form>
-		);
-	}
+			</style>
+		</form>
+	);
 }
