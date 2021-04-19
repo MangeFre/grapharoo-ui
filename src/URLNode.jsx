@@ -240,7 +240,7 @@ export default function URLNode(props) {
 					color: #c6c6c6;
 				}
 
-				.container:last-of-type .down {
+				.down.error {
 					color: #9494ff;
 				}
 
