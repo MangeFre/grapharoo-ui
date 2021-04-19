@@ -4,17 +4,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+import { isValidUrl } from './common';
+
 toast.configure();
-
-function validateInput(inputValue) {
-	// Monstrosity from stackoverflow: https://stackoverflow.com/a/8234912
-	const regex = RegExp(
-		/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-	);
-
-	const isValid = regex.test(inputValue);
-	return isValid;
-}
 
 export default function LinkInput(props) {
 
@@ -28,7 +21,7 @@ export default function LinkInput(props) {
 		const form = document.forms.link;
 		// This is the value of the link input
 		const submittedLink = form.linkInput.value.trim();
-		const valid = validateInput(submittedLink);
+		const valid = isValidUrl(submittedLink);
 		if (!valid) {
 			// This should display an error.
 			toast.error('That does not look like a link!', {
