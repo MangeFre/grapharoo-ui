@@ -19,7 +19,6 @@ export default function FixLinkDialog(props) {
         function handleClick(event) {
             const wasClicked = dialogRef.current && dialogRef.current.contains(event.target);
             if (dialogRef.current) {
-                console.debug(`Click was ${wasClicked ? 'inside' : 'outside'} the dialog`);
                 setIsShown(wasClicked);
             }
         }
