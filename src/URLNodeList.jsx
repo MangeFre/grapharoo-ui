@@ -14,8 +14,12 @@ export default function URLNodeList(props) {
     const [nextUrl, setNextUrl] = useState(null);
     const [errorUrl, setErrorUrl] = useState(null);
 
+    const [isAtBottom, setIsAtBottom] = useState(true);
+    const [wasAtBottom, setWasAtBottom] = useState(true);
+
     const { originUrl } = props;
 
+    const containerRef = useRef(null);
     const scrollToRef = useRef(null);
 
     // On originUrl change
@@ -68,12 +72,14 @@ export default function URLNodeList(props) {
 
     useEffect(() => {
         if (nextUrlNode) {
-            scrollToRef.current?.scrollIntoView({ behavior: "smooth" });
+            if (wasAtBottom && isAtBottom)
+                scrollToRef.current?.scrollIntoView({ behavior: "smooth" });
+            setWasAtBottom(isAtBottom);
         }
     }, [nextUrlNode, scrollToRef]);
 
     return (
-        <div>
+        <div ref={containerRef} onScroll={()=> setIsAtBottom(containerRef.current.offsetHeight + containerRef.current.scrollTop === containerRef.current.scrollHeight)}>
             {urlNodes}
             {nextUrlNode}
             <span ref={scrollToRef}></span>

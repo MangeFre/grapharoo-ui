@@ -3,6 +3,7 @@
 exports[`Create snapshot for future comparison 1`] = `
 <div
   className="jsx-2182788491"
+  onScroll={[Function]}
 >
   <span
     className="jsx-2182788491"
