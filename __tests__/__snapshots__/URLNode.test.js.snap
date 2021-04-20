@@ -2,13 +2,13 @@
 
 exports[`Create snapshot for future comparison 1`] = `
 <div
-  className="jsx-2394042114 container"
+  className="jsx-3424451430 container"
 >
   <div
-    className="jsx-2394042114 votesContainer"
+    className="jsx-3424451430 votesContainer"
   >
     <div
-      className="jsx-2394042114 vote up"
+      className="jsx-3424451430 vote up"
     >
       <svg
         aria-hidden="true"
@@ -29,7 +29,7 @@ exports[`Create snapshot for future comparison 1`] = `
       </svg>
     </div>
     <div
-      className="jsx-2394042114 vote down"
+      className="jsx-3424451430 vote down "
     >
       <svg
         aria-hidden="true"
@@ -51,22 +51,22 @@ exports[`Create snapshot for future comparison 1`] = `
     </div>
   </div>
   <div
-    className="jsx-2394042114"
+    className="jsx-3424451430 comment"
   >
     <div
-      className="jsx-2394042114 headerContainer"
+      className="jsx-3424451430 headerContainer"
     >
       <div
-        className="jsx-2394042114 loading"
+        className="jsx-3424451430 loading"
       >
         Loading
       </div>
     </div>
     <p
-      className="jsx-2394042114 loading"
+      className="jsx-3424451430 loading-link"
     >
       <a
-        className="jsx-2394042114"
+        className="jsx-3424451430"
         href="https://www.reddit.com/r/aww/comments/hd6xtp/comment/fvk5vao"
         target="blank"
       >

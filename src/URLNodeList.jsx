@@ -62,7 +62,7 @@ export default function URLNodeList(props) {
             toast.warning(`Processing this link did not work: ${errorUrl}`, {
 				position: toast.POSITION.BOTTOM_CENTER,
 			});
-            setNextUrlNode(<URLNode key={'ErrorUrlNode'} url={errorUrl} hasError={true}></URLNode>);
+            setNextUrlNode(<URLNode key={'ErrorUrlNode'} url={errorUrl} hasError={true} setFixedLink={setNextUrl}></URLNode>);
         }
     }, [errorUrl]);
 
