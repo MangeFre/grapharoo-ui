@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import URLNode from './URLNode';
 import { toast } from 'react-toastify';
 
-import { getNextLink } from './apiHandler.js';
+import { getNextLink, fixLink } from './apiHandler.js';
 
 toast.configure();
 
@@ -13,6 +13,7 @@ export default function URLNodeList(props) {
 
     const [nextUrl, setNextUrl] = useState(null);
     const [errorUrl, setErrorUrl] = useState(null);
+    const [fixedUrl, setFixedUrl] = useState(null);
 
     const [isAtBottom, setIsAtBottom] = useState(true);
     const [wasAtBottom, setWasAtBottom] = useState(true);
@@ -28,45 +29,69 @@ export default function URLNodeList(props) {
         setUrlNodes([]);
         setNextUrlNode(<></>);
         setErrorUrl(null);
+        setFixedUrl(null);
 
         // fetch first url
         setNextUrl(originUrl);
 
     }, [originUrl]);
 
-    useEffect(() => {
-        if (nextUrl && nextUrl !== '') {
-            if (urlNodes.some(urlNode => urlNode.url === nextUrl)) {
-                toast.warning(`Cycle detected! ${nextUrl} has already been visited.`, {
+    function loadUrl(url, fetch) {
+        if (url && url !== '') {
+            if (urlNodes.some(urlNode => urlNode.url === url)) {
+                toast.warning(`Cycle detected! ${url} has already been visited.`, {
                     position: toast.POSITION.BOTTOM_CENTER,
                 });
-            }
-            else {
-                setNextUrlNode(<URLNode key={'LoadingUrlNode'} url={nextUrl}></URLNode>);
-                const fetch = async () => {
-                    const res = await getNextLink(nextUrl);
-                    if (res) {
-                        if (res.next) {
-                            const comment = res.link.data;
-                            setUrlNodes([...urlNodes, <URLNode key={comment.created_utc} url={nextUrl} comment={comment}></URLNode>])
-                            setNextUrl(res.next.url);
-                        } else {
-                            setErrorUrl(nextUrl);
-                        }
-                    }
-
-                };
+            } else {
+                setNextUrlNode(<URLNode key={'LoadingUrlNode'} loadingUrl={url}></URLNode>);
                 fetch();
             }
         }
+    }
+
+    function processResponse(res, url) {
+        if (res) {
+            if (res.next) {
+                const comment = res.link.data;
+                const url = res.link.url;
+                setUrlNodes([...urlNodes, <URLNode key={comment.created_utc} url={url} comment={comment} seen={res.seen} fixed={res.fixed}></URLNode>])
+                setNextUrl(res.next.url);
+            } else {
+                setErrorUrl(url);
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (nextUrl && nextUrl !== '') {
+            const fetch = async () => {
+                const res = await getNextLink(nextUrl);
+                if (res) {
+                    processResponse(res, nextUrl);
+                }
+            };
+            loadUrl(nextUrl, fetch);
+        }
     }, [nextUrl]);
+
+    useEffect(() => {
+        if (fixedUrl && fixedUrl !== '') {
+            const fetch = async () => {
+                const res = await await fixLink(errorUrl, fixedUrl);
+                if (res) {
+                    processResponse(res, fixedUrl);
+                }
+            };
+            loadUrl(nextUrl, fetch);
+        }
+    }, [fixedUrl]);
 
     useEffect(() => {
         if (errorUrl) {
             toast.warning(`Processing this link did not work: ${errorUrl}`, {
 				position: toast.POSITION.BOTTOM_CENTER,
 			});
-            setNextUrlNode(<URLNode key={'ErrorUrlNode'} url={errorUrl} hasError={true} setFixedLink={setNextUrl}></URLNode>);
+            setNextUrlNode(<URLNode key={'ErrorUrlNode'} errorUrl={errorUrl} setFixedLink={setFixedUrl}></URLNode>);
         }
     }, [errorUrl]);
 
@@ -91,16 +116,8 @@ export default function URLNodeList(props) {
 						height: 100%;
 						background: #ff9999;
                         overflow-y: auto;
+                        padding-bottom: 1em;
 					}
-
-					div:last-child {
-						padding-bottom: 1rem;
-					}
-
-					li {
-						list-style-type: none;
-					}
-
 				`}</style>
         </div>
     )
