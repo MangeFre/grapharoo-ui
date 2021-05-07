@@ -7,27 +7,14 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { isValidUrl } from './common';
 
+import Dialog from './components/common/Dialog';
+
 toast.configure();
 
 export default function FixLinkDialog(props) {
     const { linkToFix, setFixedLink, isShown, setIsShown } = props;
 
-    const dialogRef = useRef(null);
     const linkInputRef = useRef(null);
-
-    useEffect(() => {
-        function handleClick(event) {
-            const wasClicked = dialogRef.current && dialogRef.current.contains(event.target);
-            if (dialogRef.current) {
-                setIsShown(wasClicked);
-            }
-        }
-
-        document.addEventListener('mousedown', handleClick);
-        return () => {
-            document.removeEventListener('mousedown', handleClick);
-        }
-    }, [dialogRef]);
 
     function onSaveClick() {
         // Get the link input element
@@ -37,15 +24,6 @@ export default function FixLinkDialog(props) {
         // Here, we validate the input is a valid url
         const valid = isValidUrl(submittedLink);
 
-        /***************************************
-         
-        This seems like a good place to call the API with the new url
-        to test to see if it is valid. However later on we may want to move 
-        that API call up into URLNode or even into the URLNodeList in order 
-        to not have to worry about passing data, such as first time visited, 
-        back up to an ancestor for display.
-
-        ****************************************/
         if (!valid) {
             // This should display an error.
             toast.error('That does not look like a link!', {
@@ -54,13 +32,14 @@ export default function FixLinkDialog(props) {
         } else {
             linkInput.value = '';
             setFixedLink(submittedLink);
+            setIsShown(false);
         }
     }
 
     return (
-        isShown ?
-            <div className='focus'>
-                <div className='container' ref={dialogRef}>
+        <>
+            <Dialog isShown={isShown} setIsShown={setIsShown}>
+                <div className='fix-link-dialog-container'>
                     <div className='header'>
                         <div>Fix Link</div>
                         <div className='icon'>
@@ -84,8 +63,11 @@ export default function FixLinkDialog(props) {
                         </div>
                     </div>
                 </div>
-                <style jsx>
-                    {`
+            </Dialog>
+
+
+            <style jsx>
+                {`
                 .focus {
                     position: absolute;
                     top: 0;
@@ -95,18 +77,12 @@ export default function FixLinkDialog(props) {
                     background-color: rgba(0, 0, 0, 0.75); 
                 }
 
-                .container {
-                    width: 33vw;
-                    position: absolute;
-                    top: 25%;
-                    left: 33%;
-                    background-color: white;
+                .fix-link-dialog-container {
                     display: flex;
                     flex-direction: column;
-                    border-radius: 0.25em;
                 }
 
-                .container > div {
+                .fix-link-dialog-container > div {
                     padding: 0.3em 0.55em;
                     white-space: nowrap;
                     color: black;
@@ -150,10 +126,9 @@ export default function FixLinkDialog(props) {
                     margin-bottom: 0.5em;
                 }
                 `}
-                </style>
-            </div>
-            :
-            <></>
+            </style>
+
+        </>
     );
 
 }
