@@ -19,6 +19,28 @@ export async function getNextLink(link) {
 	}
 }
 
+export async function fixLink(brokenLink, fixedLink) {
+	const encodedBrokenLink = encodeURI(brokenLink);
+	const encodedFixedLink = encodeURI(fixedLink);
+	const response = await fetch('http://localhost:3000/link/fix', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			broken: encodedBrokenLink,
+			fix: encodedFixedLink
+		}),
+	});
+
+	try {
+		const data = await response.json();
+		return data;
+	} catch (err) {
+		return err;
+	}
+}
+
 export async function getAllNodes() {
 	// Implement this to get ALL the nodes in the DB.
 	// Mock this for now.
