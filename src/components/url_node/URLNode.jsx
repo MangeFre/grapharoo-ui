@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
 
-import BrokenComment from './components/reddit_comment/BrokenComment';
-import Comment from './components/reddit_comment/Comment';
-import LoadingComment from './components/reddit_comment/LoadingComment';
-import VoteArrows from './components/reddit_comment/VoteArrows';
+import BrokenComment from '../reddit_comment/BrokenComment';
+import Comment from '../reddit_comment/Comment';
+import LoadingComment from '../reddit_comment/LoadingComment';
+import VoteArrows from '../reddit_comment/VoteArrows';
 
 toast.configure();
 

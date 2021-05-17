@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import LinkInput from '../src/LinkInput';
+import LinkInput from '../src/components/header/LinkInput';
 
 const onSubmit = () => {};
 

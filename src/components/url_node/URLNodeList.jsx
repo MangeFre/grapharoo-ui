@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import URLNode from './URLNode';
 import { toast } from 'react-toastify';
 
-import { getNextLink, fixLink } from './apiHandler.js';
+import { getNextLink, fixLink } from '../../apiHandler.js';
 
 toast.configure();
 
