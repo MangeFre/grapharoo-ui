@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Header from '../src/Header';
+import Header from '../src/components/header/Header';
 
 const title = 'Grapharoo';
 const subtitle = 'Mapping out the old Switcheroo Links';
