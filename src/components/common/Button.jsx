@@ -13,8 +13,12 @@ export default function Button(props) {
 
     return (
         <>
-            <div className='button'>
-                <FontAwesomeIcon icon={faIcon} onClick={() => { if(onClick) onClick(); }}></FontAwesomeIcon>
+            <div className='button' onClick={() => { if (onClick) onClick(); }}>
+                {faIcon ?
+                    <FontAwesomeIcon icon={faIcon}></FontAwesomeIcon>
+                    :
+                    <></>
+                }
                 {props.children}
             </div>
             <style jsx>{`

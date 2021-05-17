@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
+import SlimHeader from './components/header/SlimHeader';
 import URLNodeList from './URLNodeList';
 
 // Not sure about the intent of the History feature. This flag will turn it back on
@@ -17,11 +17,7 @@ export default function Content(props) {
 
 	return (
 		<>
-			<Header
-				title="Grapharoo"
-				subtitle="Mapping out the old Switcheroo Links"
-				onSubmit={setOriginUrl}
-			/>
+			<SlimHeader onSubmit={setOriginUrl}/>
 			{displayHistory ?
 				history.map((oldLink) => {
 					return <p key={oldLink}>{oldLink}</p>;
