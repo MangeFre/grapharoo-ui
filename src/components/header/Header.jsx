@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkInput from '../../LinkInput';
+import LinkInput from './LinkInput';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';

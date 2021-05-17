@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkInput from '../../LinkInput';
+import LinkInput from './LinkInput';
 import Navigation from './Navigation';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

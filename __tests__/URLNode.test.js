@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import URLNode from '../src/URLNode';
+import URLNode from '../src/components/url_node/URLNode';
 
 const url = 'https://www.reddit.com/r/aww/comments/hd6xtp/comment/fvk5vao';
 const onFinishLoad = () => {};

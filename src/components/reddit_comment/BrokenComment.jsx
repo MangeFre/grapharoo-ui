@@ -6,7 +6,7 @@ import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import Button from '../common/Button';
 import ToolTip from '../common/ToolTip';
 
-import FixLinkDialog from '../../FixLinkDialog';
+import FixLinkDialog from '../dialogs/FixLinkDialog';
 
 export default function BrokenComment(props) {
 

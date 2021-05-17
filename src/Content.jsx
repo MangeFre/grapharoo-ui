@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SlimHeader from './components/header/SlimHeader';
-import URLNodeList from './URLNodeList';
+import URLNodeList from './components/url_node/URLNodeList';
 
 // Not sure about the intent of the History feature. This flag will turn it back on
 const displayHistory = false;

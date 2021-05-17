@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { isValidUrl } from './common';
+import { isValidUrl } from '../../common';
 
-import Dialog from './components/common/Dialog';
+import Dialog from '../common/Dialog';
 
 toast.configure();
 
