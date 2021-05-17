@@ -3,49 +3,32 @@
 exports[`Create snapshot for future comparison 1`] = `
 Array [
   <div
-    className="jsx-250822500 header"
+    className="jsx-3066498889 header"
   >
-    <div
-      className="jsx-250822500 title"
+    <a
+      className="jsx-3066498889 icon"
+      href="/"
     >
-      <div
-        className="jsx-250822500 icon"
+      <svg
+        aria-hidden="true"
+        className="svg-inline--fa fa-project-diagram fa-w-20 "
+        data-icon="project-diagram"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        style={Object {}}
+        viewBox="0 0 640 512"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-project-diagram fa-w-20 "
-          data-icon="project-diagram"
-          data-prefix="fas"
-          focusable="false"
-          role="img"
+        <path
+          d="M384 320H256c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V352c0-17.67-14.33-32-32-32zM192 32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v128c0 17.67 14.33 32 32 32h95.72l73.16 128.04C211.98 300.98 232.4 288 256 288h.28L192 175.51V128h224V64H192V32zM608 0H480c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32z"
+          fill="currentColor"
           style={Object {}}
-          viewBox="0 0 640 512"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M384 320H256c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V352c0-17.67-14.33-32-32-32zM192 32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v128c0 17.67 14.33 32 32 32h95.72l73.16 128.04C211.98 300.98 232.4 288 256 288h.28L192 175.51V128h224V64H192V32zM608 0H480c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h128c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32z"
-            fill="currentColor"
-            style={Object {}}
-          />
-        </svg>
-      </div>
-      <div
-        className="jsx-250822500"
-      >
-        <h1
-          className="jsx-250822500"
-        >
-          Grapharoo
-        </h1>
-        <h3
-          className="jsx-250822500"
-        >
-          Mapping out the old Switcheroo Links
-        </h3>
-      </div>
-    </div>
+        />
+      </svg>
+    </a>
     <div
-      className="jsx-250822500 searchForm"
+      className="jsx-3066498889 search"
     >
       <form
         className="jsx-457726797 searchForm"
@@ -81,6 +64,44 @@ Array [
           </svg>
         </button>
       </form>
+    </div>
+    <div
+      className="jsx-3066498889 navigation"
+    >
+      <div
+        className="jsx-1151422277 navigation-container"
+      >
+        <div
+          className="jsx-1151422277 navigation-button"
+        >
+          <div
+            className="jsx-96112750 button"
+            onClick={[Function]}
+          >
+            <a
+              className="jsx-1151422277 navigation-link"
+              href="/"
+            >
+              Home
+            </a>
+          </div>
+        </div>
+        <div
+          className="jsx-1151422277 navigation-button"
+        >
+          <div
+            className="jsx-96112750 button"
+            onClick={[Function]}
+          >
+            <a
+              className="jsx-1151422277 navigation-link"
+              href="/linkgraph"
+            >
+              Graph
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>,
   <div

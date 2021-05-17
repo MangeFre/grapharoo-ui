@@ -1,15 +1,12 @@
 import React from 'react';
-import Header from '../src/Header';
+import SlimHeader from '../src/components/header/SlimHeader';
 import LinkGraph from '../src/LinkGraph';
 import { getAllNodes } from '../src/apiHandler.js';
 
 export default function LinkGraphPage({ nodes }) {
 	return (
 		<>
-			<Header
-				title="Grapharoo"
-				subtitle="Mapping out the old Switcheroo Links"
-				onSubmit={() => {}}></Header>
+			<SlimHeader onSubmit={() => {}}></SlimHeader>
 			<LinkGraph nodes={nodes} />
 		</>
 	);
