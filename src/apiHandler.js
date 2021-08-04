@@ -1,7 +1,7 @@
 // Just an API handler file for talking to our API
 export async function getNextLink(link) {
 	const encodedLink = encodeURI(link);
-	const response = await fetch('http://localhost:3000/link/next', {
+	const response = await fetch(`http://${process.env.NEXT_PUBLIC_API_ENDPOINT}/link/next`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export async function getNextLink(link) {
 export async function fixLink(brokenLink, fixedLink) {
 	const encodedBrokenLink = encodeURI(brokenLink);
 	const encodedFixedLink = encodeURI(fixedLink);
-	const response = await fetch('http://localhost:3000/link/fix', {
+	const response = await fetch(`http://${process.env.NEXT_PUBLIC_API_ENDPOINT}/link/fix`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export async function fixLink(brokenLink, fixedLink) {
 export async function getAllNodes() {
 	// Implement this to get ALL the nodes in the DB.
 	// Mock this for now.
-	const response = await fetch('http://localhost:3000/linkgraph', {
+	const response = await fetch(`http://${process.env.NEXT_PUBLIC_API_ENDPOINT}/linkgraph`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
